@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 # Setup do projeto: instala direnv, cria o venv e instala as dependências.
-# Use: ./scripts/build.sh  (macOS/Linux/Git Bash)
+# Use: ./scripts/build.sh [extra]  (macOS/Linux/Git Bash) — extra é o grupo de
+# dependências opcionais do pyproject.toml (default: dev)
 # Windows nativo: use scripts\build.bat
+#
+# SANDBOX: mudança temporária de teste do fluxo de release via Actions —
+# quando promover pro -App de verdade, aplicar o mesmo ajuste lá.
 
 VENV_NAME="venv"
+EXTRA="${1:-dev}"
 PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
 
 if [[ -z "$PYTHON" ]]; then
@@ -50,7 +55,7 @@ fi
 
 # Instala o pacote e suas dependências
 python -m pip install --upgrade pip
-pip install -e ".[dev]"
+pip install -e ".[$EXTRA]"
 
 # Registra a pasta de hooks do projeto
 git config core.hooksPath .githooks
