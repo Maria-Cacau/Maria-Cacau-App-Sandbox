@@ -1,0 +1,17 @@
+# TODO (sandbox): apontar de volta pra @v1 assim que o Maria-Cacau-Actions mergear
+# a branch feature/release-action e mover a tag.
+name: release
+
+on:
+  push:
+    branches: [main]
+    paths: ['pyproject.toml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  release:
+    uses: Maria-Cacau/Maria-Cacau-Actions/.github/workflows/release.yml@feature/release-action
