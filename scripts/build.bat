@@ -1,8 +1,14 @@
 @echo off
 REM Setup do projeto no Windows: cria o venv e instala as dependencias.
-REM Use: scripts\build.bat
+REM Use: scripts\build.bat [extra] — extra e o grupo de dependencias opcionais
+REM do pyproject.toml (default: dev)
+REM
+REM SANDBOX: mudanca temporaria de teste do fluxo de release via Actions —
+REM quando promover pro -App de verdade, aplicar o mesmo ajuste la.
 
 set VENV_NAME=venv
+set EXTRA=%1
+if "%EXTRA%"=="" set EXTRA=dev
 
 REM Verifica Python
 where python >nul 2>&1
@@ -20,7 +26,7 @@ if not exist "%VENV_NAME%\" (
 REM Instala o pacote e suas dependencias
 call %VENV_NAME%\Scripts\activate.bat
 python -m pip install --upgrade pip
-python -m pip install -e ".[dev]"
+python -m pip install -e ".[%EXTRA%]"
 
 REM Registra a pasta de hooks do projeto
 git config core.hooksPath .githooks
