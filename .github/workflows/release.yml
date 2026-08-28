@@ -1,5 +1,5 @@
 # TODO (sandbox): apontar de volta pra @v1 assim que o Maria-Cacau-Actions mergear
-# a branch feature/release-action e mover a tag.
+# a branch e mover a tag v1.
 name: release
 
 on:
@@ -14,4 +14,4 @@ permissions:
 
 jobs:
   release:
-    uses: Maria-Cacau/Maria-Cacau-Actions/.github/workflows/release.yml@feature/release-action
+    uses: Maria-Cacau/Maria-Cacau-Actions/.github/workflows/release.yml@1.1-Test
